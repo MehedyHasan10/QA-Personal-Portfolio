@@ -1,10 +1,16 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence, useScroll } from "framer-motion"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   User,
   GraduationCap,
@@ -25,7 +31,7 @@ import {
   FileText,
   Award,
   LocateIcon as Location,
-} from "lucide-react"
+} from "lucide-react";
 
 // CV Data
 const cvData = {
@@ -45,7 +51,7 @@ const cvData = {
       title: "Junior QA Engineer",
       company: "Robi Axiata PLC (Vendor ESL)",
       period: "February 2025-July 2025",
-      location: "Full time, Shanta Forum, Dhaka",
+      location: "Contractual,Shanta Forum, Dhaka",
       responsibilities: [
         "Designed and executed 200+ test cases and 5 project checklists, achieving 85% defect detection across the Software Testing Life Cycle (STLC).",
         "Tracked and resolved issues using Jira and Service Desk.",
@@ -73,11 +79,24 @@ const cvData = {
         "Performed database testing by executing SQL queries to verify data integrity, consistency, and backend processes.",
       ],
     },
+
+    {
+      title: "Junior Quality Control Engineer",
+      company: "Quantanite Bangladesh Ltd.",
+      period: "October 2023-July 2024",
+      location: "Remote, Mirpur, Dhaka",
+      responsibilities: [
+        "Cleaned, organized, and analyzed large datasets to ensure high data quality and integrity.",
+        "Performed quality control checks to ensure data met predefined accuracy and consistency standards.",
+        "Identified and resolved data anomalies, contributing to improved project reliability and reporting accuracy.",
+        "Collaborated with cross-functional teams to implement data validation strategies and maintain smooth workflow.",
+      ],
+    },
     {
       title: "SQA Engineer (Intern)",
       company: "Dream71 Bangladesh Ltd.",
-      period: "October 2023-July 2024",
-      location: "Remote, Mirpur, Dhaka",
+      period: "June 2023-October 2023",
+      location: "On-Site, Bashundhara, Dhaka",
       responsibilities: [
         "Conducted Unit, Integration, and System Testing, including Design Verification, Non-Functional, and Regression Testing.",
         "Conducted API testing with Postman API and Web Debugging with Charles and Fiddler.",
@@ -85,18 +104,6 @@ const cvData = {
         "Reported bugs using Jira and wrote various test documentation such as Checklists, Acceptance Sheets, Test Data, and Test Cases.",
         "Prepared quality reports tailored to target audiences and selected testing criteria through surveys.",
         "Participated in daily Scrum meetings to ensure effective communication and progress tracking.",
-      ],
-    },
-    {
-      title: "Junior Quality Control Engineer",
-      company: "Quantanite Bangladesh Ltd.",
-      period: "June 2023-October 2023",
-      location: "Full time, Bashundhara, Dhaka",
-      responsibilities: [
-        "Cleaned, organized, and analyzed large datasets to ensure high data quality and integrity.",
-        "Performed quality control checks to ensure data met predefined accuracy and consistency standards.",
-        "Identified and resolved data anomalies, contributing to improved project reliability and reporting accuracy.",
-        "Collaborated with cross-functional teams to implement data validation strategies and maintain smooth workflow.",
       ],
     },
   ],
@@ -130,7 +137,7 @@ const cvData = {
   ],
   achievement:
     "Reported a critical bug in the Telegram Android app where incoming calls continued ringing if data was turned off mid-ring; submitted a detailed bug report and video demonstration, which was officially acknowledged by the Telegram team.",
-}
+};
 
 // CV Modal Component
 function CVModal({ isOpen, onClose, isDarkMode }) {
@@ -138,71 +145,77 @@ function CVModal({ isOpen, onClose, isDarkMode }) {
     // Dynamic import for jsPDF to avoid SSR issues
     import("jspdf")
       .then(({ jsPDF }) => {
-        const doc = new jsPDF()
+        const doc = new jsPDF();
 
         // Set font
-        doc.setFont("helvetica")
+        doc.setFont("helvetica");
 
-        let yPosition = 15
-        const pageWidth = doc.internal.pageSize.width
-        const margin = 15
-        const maxWidth = pageWidth - margin * 2
+        let yPosition = 15;
+        const pageWidth = doc.internal.pageSize.width;
+        const margin = 15;
+        const maxWidth = pageWidth - margin * 2;
 
         // Summary at the top (as in your CV)
-        doc.setFontSize(10)
-        doc.setFont("helvetica", "normal")
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
         const summaryText =
-          "QA Engineer with 2+ years of experience in manual and automated testing, ensuring the quality and reliability of web and software applications. Proficient in Selenium WebDriver, TestNG, and CI/CD integration, with expertise in test automation, functional testing, and detailed documentation. Skilled in identifying bugs, enhancing test coverage, and optimizing testing strategies to deliver high-quality products."
-        const summaryLines = doc.splitTextToSize(summaryText, maxWidth)
-        doc.text(summaryLines, margin, yPosition)
-        yPosition += summaryLines.length * 4 + 8
+          "QA Engineer with 2+ years of experience in manual and automated testing, ensuring the quality and reliability of web and software applications. Proficient in Selenium WebDriver, TestNG, and CI/CD integration, with expertise in test automation, functional testing, and detailed documentation. Skilled in identifying bugs, enhancing test coverage, and optimizing testing strategies to deliver high-quality products.";
+        const summaryLines = doc.splitTextToSize(summaryText, maxWidth);
+        doc.text(summaryLines, margin, yPosition);
+        yPosition += summaryLines.length * 4 + 8;
 
         // Header - Name (larger and bold)
-        doc.setFontSize(16)
-        doc.setFont("helvetica", "bold")
-        doc.text("Md. Mehedy Hasan Siam", margin, yPosition)
-        yPosition += 8
+        doc.setFontSize(16);
+        doc.setFont("helvetica", "bold");
+        doc.text("Md. Mehedy Hasan Siam", margin, yPosition);
+        yPosition += 8;
 
         // Contact Info (smaller font)
-        doc.setFontSize(9)
-        doc.setFont("helvetica", "normal")
-        doc.text("mehedisiam10@gmail.com", margin, yPosition)
-        yPosition += 4
-        doc.text("01793179626", margin, yPosition)
-        yPosition += 4
-        doc.text("in/md-mehedy-hasan-siam", margin, yPosition)
-        yPosition += 4
-        doc.text("MehedyHasan10", margin, yPosition)
-        yPosition += 4
-        doc.text("mehedyhasan10.github.io/siam.github.io", margin, yPosition)
-        yPosition += 10
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
+        doc.text("mehedisiam10@gmail.com", margin, yPosition);
+        yPosition += 4;
+        doc.text("01793179626", margin, yPosition);
+        yPosition += 4;
+        doc.text("Block-C, House No.31, Banasree, Dhaka", margin, yPosition);
+        yPosition += 4;
+        doc.text("in/md-mehedy-hasan-siam", margin, yPosition);
+        yPosition += 4;
+        doc.text("MehedyHasan10", margin, yPosition);
+        yPosition += 4;
+        doc.text("mehedy-siam.vercel.app", margin, yPosition);
+        yPosition += 10;
 
         // SUMMARY Section Header
-        doc.setFontSize(12)
-        doc.setFont("helvetica", "bold")
-        doc.text("SUMMARY", margin, yPosition)
-        yPosition += 10
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.text("SUMMARY", margin, yPosition);
+        yPosition += 10;
 
         // EXPERIENCE Section Header
-        doc.setFontSize(12)
-        doc.setFont("helvetica", "bold")
-        doc.text("EXPERIENCE", margin, yPosition)
-        yPosition += 8
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.text("EXPERIENCE", margin, yPosition);
+        yPosition += 8;
 
         // Junior QA Engineer (Current - First)
-        doc.setFontSize(11)
-        doc.setFont("helvetica", "bold")
-        doc.text("Junior QA Engineer", margin, yPosition)
-        yPosition += 5
+        doc.setFontSize(11);
+        doc.setFont("helvetica", "bold");
+        doc.text("Junior QA Engineer", margin, yPosition);
+        yPosition += 5;
 
-        doc.setFontSize(10)
-        doc.setFont("helvetica", "bold")
-        doc.text("Robi Axiata PLC", margin, yPosition)
-        yPosition += 5
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "bold");
+        doc.text("Robi Axiata PLC (Vendor ESL)", margin, yPosition);
+        yPosition += 5;
 
-        doc.setFont("helvetica", "normal")
-        doc.text("February 2025-Present, Full time, Shanta Forum, Dhaka", margin, yPosition)
-        yPosition += 6
+        doc.setFont("helvetica", "normal");
+        doc.text(
+          "February 2025- July 2025, Contractual, Shanta Forum, Dhaka",
+          margin,
+          yPosition
+        );
+        yPosition += 6;
 
         // Responsibilities for Robi
         const robiResponsibilities = [
@@ -213,38 +226,42 @@ function CVModal({ isOpen, onClose, isDarkMode }) {
           "Improved UI/UX, contributing to a 15% increase in user retention.",
           "Working with developers, DevOps, and cross-functional teams to improve software quality.",
           "Monitored system performance and alerts using Dynatrace, My Robi, Robi Cash, Robi Alap, bdtickets, and IT360.",
-        ]
+        ];
 
         robiResponsibilities.forEach((resp) => {
           if (yPosition > 270) {
-            doc.addPage()
-            yPosition = 20
+            doc.addPage();
+            yPosition = 20;
           }
-          const respLines = doc.splitTextToSize(resp, maxWidth - 5)
-          doc.text(respLines, margin, yPosition)
-          yPosition += respLines.length * 4 + 2
-        })
-        yPosition += 5
+          const respLines = doc.splitTextToSize(resp, maxWidth - 5);
+          doc.text(respLines, margin, yPosition);
+          yPosition += respLines.length * 4 + 2;
+        });
+        yPosition += 5;
 
         // QA Automation Engineer (Trainee)
         if (yPosition > 240) {
-          doc.addPage()
-          yPosition = 20
+          doc.addPage();
+          yPosition = 20;
         }
 
-        doc.setFontSize(11)
-        doc.setFont("helvetica", "bold")
-        doc.text("QA Automation Engineer (Trainee)", margin, yPosition)
-        yPosition += 5
+        doc.setFontSize(11);
+        doc.setFont("helvetica", "bold");
+        doc.text("QA Automation Engineer (Trainee)", margin, yPosition);
+        yPosition += 5;
 
-        doc.setFontSize(10)
-        doc.setFont("helvetica", "bold")
-        doc.text("a1qa", margin, yPosition)
-        yPosition += 5
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "bold");
+        doc.text("a1qa", margin, yPosition);
+        yPosition += 5;
 
-        doc.setFont("helvetica", "normal")
-        doc.text("August 2024-December 2024, Remote, Lakewood, Colorado", margin, yPosition)
-        yPosition += 6
+        doc.setFont("helvetica", "normal");
+        doc.text(
+          "August 2024-December 2024, Remote, Lakewood, Colorado",
+          margin,
+          yPosition
+        );
+        yPosition += 6;
 
         // Responsibilities for a1qa
         const a1qaResponsibilities = [
@@ -257,38 +274,42 @@ function CVModal({ isOpen, onClose, isDarkMode }) {
           "Conducted performance testing with JMeter to assess application responsiveness, scalability, and stability under load.",
           "Executed security testing to identify vulnerabilities, validate access controls, and ensure data protection.",
           "Performed database testing by executing SQL queries to verify data integrity, consistency, and backend processes.",
-        ]
+        ];
 
         a1qaResponsibilities.forEach((resp) => {
           if (yPosition > 270) {
-            doc.addPage()
-            yPosition = 20
+            doc.addPage();
+            yPosition = 20;
           }
-          const respLines = doc.splitTextToSize(resp, maxWidth - 5)
-          doc.text(respLines, margin, yPosition)
-          yPosition += respLines.length * 4 + 2
-        })
-        yPosition += 5
+          const respLines = doc.splitTextToSize(resp, maxWidth - 5);
+          doc.text(respLines, margin, yPosition);
+          yPosition += respLines.length * 4 + 2;
+        });
+        yPosition += 5;
 
         // SQA Engineer (Intern)
         if (yPosition > 240) {
-          doc.addPage()
-          yPosition = 20
+          doc.addPage();
+          yPosition = 20;
         }
 
-        doc.setFontSize(11)
-        doc.setFont("helvetica", "bold")
-        doc.text("SQA Engineer (Intern)", margin, yPosition)
-        yPosition += 5
+        doc.setFontSize(11);
+        doc.setFont("helvetica", "bold");
+        doc.text("SQA Engineer (Intern)", margin, yPosition);
+        yPosition += 5;
 
-        doc.setFontSize(10)
-        doc.setFont("helvetica", "bold")
-        doc.text("Dream71 Bangladesh Ltd.", margin, yPosition)
-        yPosition += 5
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "bold");
+        doc.text("Dream71 Bangladesh Ltd.", margin, yPosition);
+        yPosition += 5;
 
-        doc.setFont("helvetica", "normal")
-        doc.text("October 2023-July 2024, Remote, Mirpur, Dhaka", margin, yPosition)
-        yPosition += 6
+        doc.setFont("helvetica", "normal");
+        doc.text(
+          "June 2023-October 2023, On-Site, Bashundhara, Dhaka",
+          margin,
+          yPosition
+        );
+        yPosition += 6;
 
         // Responsibilities for Dream71
         const dream71Responsibilities = [
@@ -298,160 +319,142 @@ function CVModal({ isOpen, onClose, isDarkMode }) {
           "Reported bugs using Jira and wrote various test documentation such as Checklists, Acceptance Sheets, Test Data, and Test Cases.",
           "Prepared quality reports tailored to target audiences and selected testing criteria through surveys.",
           "Participated in daily Scrum meetings to ensure effective communication and progress tracking.",
-        ]
+        ];
 
         dream71Responsibilities.forEach((resp) => {
           if (yPosition > 270) {
-            doc.addPage()
-            yPosition = 20
+            doc.addPage();
+            yPosition = 20;
           }
-          const respLines = doc.splitTextToSize(resp, maxWidth - 5)
-          doc.text(respLines, margin, yPosition)
-          yPosition += respLines.length * 4 + 2
-        })
-        yPosition += 5
+          const respLines = doc.splitTextToSize(resp, maxWidth - 5);
+          doc.text(respLines, margin, yPosition);
+          yPosition += respLines.length * 4 + 2;
+        });
+        yPosition += 5;
 
-        // Junior Quality Control Engineer
-        if (yPosition > 240) {
-          doc.addPage()
-          yPosition = 20
-        }
+        // // Address
+        // if (yPosition > 260) {
+        //   doc.addPage()
+        //   yPosition = 20
+        // }
 
-        doc.setFontSize(11)
-        doc.setFont("helvetica", "bold")
-        doc.text("Junior Quality Control Engineer", margin, yPosition)
-        yPosition += 5
-
-        doc.setFontSize(10)
-        doc.setFont("helvetica", "bold")
-        doc.text("Quantanite Bangladesh Ltd.", margin, yPosition)
-        yPosition += 5
-
-        doc.setFont("helvetica", "normal")
-        doc.text("June 2023-October 2023, Full time, Bashundhara, Dhaka", margin, yPosition)
-        yPosition += 6
-
-        // Responsibilities for Quantanite
-        const quantaniteResponsibilities = [
-          "Cleaned, organized, and analyzed large datasets to ensure high data quality and integrity.",
-          "Performed quality control checks to ensure data met predefined accuracy and consistency standards.",
-          "Identified and resolved data anomalies, contributing to improved project reliability and reporting accuracy.",
-          "Collaborated with cross-functional teams to implement data validation strategies and maintain smooth workflow.",
-        ]
-
-        quantaniteResponsibilities.forEach((resp) => {
-          if (yPosition > 270) {
-            doc.addPage()
-            yPosition = 20
-          }
-          const respLines = doc.splitTextToSize(resp, maxWidth - 5)
-          doc.text(respLines, margin, yPosition)
-          yPosition += respLines.length * 4 + 2
-        })
-        yPosition += 8
-
-        // Address
-        if (yPosition > 260) {
-          doc.addPage()
-          yPosition = 20
-        }
-
-        doc.setFontSize(10)
-        doc.setFont("helvetica", "normal")
-        doc.text("Block-C, House No.31, Banasree, Dhaka", margin, yPosition)
-        yPosition += 10
+        // doc.setFontSize(10)
+        // doc.setFont("helvetica", "normal")
+        // doc.text("Block-C, House No.31, Banasree, Dhaka", margin, yPosition)
+        // yPosition += 10
 
         // ACHIEVEMENT Section
-        doc.setFontSize(12)
-        doc.setFont("helvetica", "bold")
-        doc.text("ACHIEVEMENT", margin, yPosition)
-        yPosition += 8
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.text("ACHIEVEMENT", margin, yPosition);
+        yPosition += 8;
 
-        doc.setFontSize(10)
-        doc.setFont("helvetica", "normal")
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
         const achievementText =
-          "Reported a critical bug in the Telegram Android app where incoming calls continued ringing if data was turned off mid-ring; submitted a detailed bug report and video demonstration, which was officially acknowledged by the Telegram team."
-        const achievementLines = doc.splitTextToSize(achievementText, maxWidth)
-        doc.text(achievementLines, margin, yPosition)
-        yPosition += achievementLines.length * 4 + 10
+          "Reported a critical bug in the Telegram Android app where incoming calls continued ringing if data was turned off mid-ring; submitted a detailed bug report and video demonstration, which was officially acknowledged by the Telegram team.";
+        const achievementLines = doc.splitTextToSize(achievementText, maxWidth);
+        doc.text(achievementLines, margin, yPosition);
+        yPosition += achievementLines.length * 4 + 10;
 
         // EDUCATION Section
         if (yPosition > 200) {
-          doc.addPage()
-          yPosition = 20
+          doc.addPage();
+          yPosition = 20;
         }
 
-        doc.setFontSize(12)
-        doc.setFont("helvetica", "bold")
-        doc.text("EDUCATION", margin, yPosition)
-        yPosition += 8
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.text("EDUCATION", margin, yPosition);
+        yPosition += 8;
 
         // Education entries
-        doc.setFontSize(10)
-        doc.setFont("helvetica", "normal")
-        doc.text("Bachelor of Science, Computer Science & Engineering", margin, yPosition)
-        yPosition += 5
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
+        doc.text(
+          "Bachelor of Science, Computer Science & Engineering",
+          margin,
+          yPosition
+        );
+        yPosition += 5;
         doc.text(
           "American International University Bangladesh, Dhaka • CGPA: 3.58 • Passing year: 2023",
           margin,
-          yPosition,
-        )
-        yPosition += 8
+          yPosition
+        );
+        yPosition += 8;
 
-        doc.text("Higher Secondary Certificate (HSC)", margin, yPosition)
-        yPosition += 5
-        doc.text("Sirajganj Govt College, Sirajganj • GPA: 4.50 • Passing year: 2017", margin, yPosition)
-        yPosition += 8
+        doc.text("Higher Secondary Certificate (HSC)", margin, yPosition);
+        yPosition += 5;
+        doc.text(
+          "Sirajganj Govt College, Sirajganj • GPA: 4.50 • Passing year: 2017",
+          margin,
+          yPosition
+        );
+        yPosition += 8;
 
-        doc.text("Secondary School Certificate (SSC)", margin, yPosition)
-        yPosition += 5
-        doc.text("B.L Govt High School, Sirajganj • GPA: 5.00 • Passing year: 2015", margin, yPosition)
-        yPosition += 15
+        doc.text("Secondary School Certificate (SSC)", margin, yPosition);
+        yPosition += 5;
+        doc.text(
+          "B.L Govt High School, Sirajganj • GPA: 5.00 • Passing year: 2015",
+          margin,
+          yPosition
+        );
+        yPosition += 15;
 
         // TECHNICAL SKILLS Section
-        doc.setFontSize(12)
-        doc.setFont("helvetica", "bold")
-        doc.text("TECHNICAL SKILLS", margin, yPosition)
-        yPosition += 8
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.text("TECHNICAL SKILLS", margin, yPosition);
+        yPosition += 8;
 
-        doc.setFontSize(10)
-        doc.setFont("helvetica", "normal")
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
         const skillsText =
-          "Selenium WebDriver, Aquality Selenium, TestNG, Gherkin, Jenkins, Allure, BrowserStack, DDT, Postman, JMeter, Jira, Git, Postman, Java, Docker, SQL"
-        const skillsLines = doc.splitTextToSize(skillsText, maxWidth)
-        doc.text(skillsLines, margin, yPosition)
-        yPosition += skillsLines.length * 4 + 10
+          "Selenium WebDriver, Aquality Selenium, TestNG, Gherkin, Jenkins, Allure, BrowserStack, DDT, Postman, JMeter, Jira, Git, Postman, Java, Docker, SQL";
+        const skillsLines = doc.splitTextToSize(skillsText, maxWidth);
+        doc.text(skillsLines, margin, yPosition);
+        yPosition += skillsLines.length * 4 + 10;
 
         // CERTIFICATE Section
-        doc.setFontSize(12)
-        doc.setFont("helvetica", "bold")
-        doc.text("CERTIFICATE", margin, yPosition)
-        yPosition += 8
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.text("CERTIFICATE", margin, yPosition);
+        yPosition += 8;
 
-        doc.setFontSize(10)
-        doc.setFont("helvetica", "normal")
-        doc.text("API Fundamentals Student Expert - Postman", margin, yPosition)
-        yPosition += 5
-        doc.text("QA Automation Testing - a1qa", margin, yPosition)
-        yPosition += 5
-        doc.text("Big Data and Hadoop", margin, yPosition)
-        yPosition += 5
-        doc.text("Database for developers-Foundation Oracle", margin, yPosition)
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
+        doc.text(
+          "API Fundamentals Student Expert - Postman",
+          margin,
+          yPosition
+        );
+        yPosition += 5;
+        doc.text("QA Automation Testing - a1qa", margin, yPosition);
+        yPosition += 5;
+        doc.text("Big Data and Hadoop", margin, yPosition);
+        yPosition += 5;
+        doc.text(
+          "Database for developers-Foundation Oracle",
+          margin,
+          yPosition
+        );
 
         // Save the PDF
-        doc.save("Md_Mehedy_Hasan_Siam_CV.pdf")
+        doc.save("Md_Mehedy_Hasan_Siam_CV.pdf");
       })
       .catch((error) => {
-        console.error("Error loading jsPDF:", error)
+        console.error("Error loading jsPDF:", error);
         // Fallback to text download with exact format
         const cvContent = `QA Engineer with 2+ years of experience in manual and automated testing, ensuring the quality and reliability of web and software applications. Proficient in Selenium WebDriver, TestNG, and CI/CD integration, with expertise in test automation, functional testing, and detailed documentation. Skilled in identifying bugs, enhancing test coverage, and optimizing testing strategies to deliver high-quality products.
 
 Md. Mehedy Hasan Siam
 mehedisiam10@gmail.com
 01793179626
+Block-C, House No.31, Banasree, Dhaka
 in/md-mehedy-hasan-siam
 MehedyHasan10
-mehedyhasan10.github.io/siam.github.io
+mehedy-siam.vercel.app
 
 SUMMARY
 
@@ -459,7 +462,7 @@ EXPERIENCE
 
 Junior QA Engineer
 Robi Axiata PLC (Vendor ESL)
-February 2025- July 2025, Full time, Shanta Forum, Dhaka
+February 2025- July 2025, contractual, Shanta Forum, Dhaka
 Designed and executed 200+ test cases and 5 project checklists, achieving 85% defect detection across the Software Testing Life Cycle (STLC).
 Tracked and resolved issues using Jira and Service Desk.
 Monitored database alerts, ensured backup health, and validated automated backups.
@@ -481,9 +484,17 @@ Conducted performance testing with JMeter to assess application responsiveness, 
 Executed security testing to identify vulnerabilities, validate access controls, and ensure data protection.
 Performed database testing by executing SQL queries to verify data integrity, consistency, and backend processes.
 
+Junior Quality Control Engineer
+Quantanite Bangladesh Ltd.
+October 2023-July 2024, Remote, Mirpur, Dhaha
+Cleaned, organized, and analyzed large datasets to ensure high data quality and integrity.
+Performed quality control checks to ensure data met predefined accuracy and consistency standards.
+Identified and resolved data anomalies, contributing to improved project reliability and reporting accuracy.
+Collaborated with cross-functional teams to implement data validation strategies and maintain smooth workflow.
+
 SQA Engineer (Intern)
 Dream71 Bangladesh Ltd.
-October 2023-July 2024, Remote, Mirpur, Dhaha
+June 2023-October 2023, Full time, Bashundhara, Dhaka
 Conducted Unit, Integration, and System Testing, including Design Verification, Non-Functional, and Regression Testing.
 Conducted API testing with Postman API and Web Debugging with Charles and Fiddler.
 Executed Cross-Browser Testing to identify GUI and Functional Bugs.
@@ -491,15 +502,6 @@ Reported bugs using Jira and wrote various test documentation such as Checklists
 Prepared quality reports tailored to target audiences and selected testing criteria through surveys.
 Participated in daily Scrum meetings to ensure effective communication and progress tracking.
 
-Junior Quality Control Engineer
-Quantanite Bangladesh Ltd.
-June 2023-October 2023, Full time, Bashundhara, Dhaka
-Cleaned, organized, and analyzed large datasets to ensure high data quality and integrity.
-Performed quality control checks to ensure data met predefined accuracy and consistency standards.
-Identified and resolved data anomalies, contributing to improved project reliability and reporting accuracy.
-Collaborated with cross-functional teams to implement data validation strategies and maintain smooth workflow.
-
-Block-C, House No.31, Banasree, Dhaka
 
 ACHIEVEMENT
 Reported a critical bug in the Telegram Android app where incoming calls continued ringing if data was turned off mid-ring; submitted a detailed bug report and video demonstration, which was officially acknowledged by the Telegram team.
@@ -521,21 +523,21 @@ CERTIFICATE
 API Fundamentals Student Expert - Postman
 QA Automation Testing - a1qa
 Big Data and Hadoop
-Database for developers-Foundation Oracle`
+Database for developers-Foundation Oracle`;
 
-        const blob = new Blob([cvContent], { type: "text/plain" })
-        const url = window.URL.createObjectURL(blob)
-        const a = document.createElement("a")
-        a.href = url
-        a.download = "Md_Mehedy_Hasan_Siam_CV.txt"
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
-        window.URL.revokeObjectURL(url)
-      })
-  }
+        const blob = new Blob([cvContent], { type: "text/plain" });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Md_Mehedy_Hasan_Siam_CV.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      });
+  };
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <AnimatePresence>
@@ -558,7 +560,9 @@ Database for developers-Foundation Oracle`
           {/* Header */}
           <div
             className={`sticky top-0 z-10 p-6 border-b flex justify-between items-center ${
-              isDarkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
+              isDarkMode
+                ? "bg-gray-800 border-gray-700"
+                : "bg-white border-gray-200"
             }`}
           >
             <div className="flex items-center space-x-3">
@@ -566,7 +570,10 @@ Database for developers-Foundation Oracle`
               <h2 className="text-2xl font-bold">My CV</h2>
             </div>
             <div className="flex items-center space-x-3">
-              <Button onClick={downloadCV} className="bg-blue-600 hover:bg-blue-700 text-white">
+              <Button
+                onClick={downloadCV}
+                className="bg-blue-600 hover:bg-blue-700 text-white"
+              >
                 <Download className="w-4 h-4 mr-2" />
                 Download CV
               </Button>
@@ -574,7 +581,9 @@ Database for developers-Foundation Oracle`
                 variant="ghost"
                 size="sm"
                 onClick={onClose}
-                className={isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"}
+                className={
+                  isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
+                }
               >
                 <X className="w-5 h-5" />
               </Button>
@@ -585,7 +594,9 @@ Database for developers-Foundation Oracle`
           <div className="p-6 space-y-8">
             {/* Personal Info */}
             <div className="text-center">
-              <h1 className="text-3xl font-bold mb-4">{cvData.personalInfo.name}</h1>
+              <h1 className="text-3xl font-bold mb-4">
+                {cvData.personalInfo.name}
+              </h1>
               <div className="flex flex-wrap justify-center gap-4 text-sm">
                 <span className="flex items-center gap-1">
                   <Mail className="w-4 h-4" />
@@ -613,30 +624,44 @@ Database for developers-Foundation Oracle`
             {/* Summary */}
             <div>
               <h2 className="text-xl font-bold mb-3 text-blue-600">SUMMARY</h2>
-              <p className={`leading-relaxed text-justify ${isDarkMode ? "text-gray-300" : "text-gray-700"}`}>
+              <p
+                className={`leading-relaxed text-justify ${
+                  isDarkMode ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
                 {cvData.summary}
               </p>
             </div>
 
             {/* Experience */}
             <div>
-              <h2 className="text-xl font-bold mb-4 text-blue-600">EXPERIENCE</h2>
+              <h2 className="text-xl font-bold mb-4 text-blue-600">
+                EXPERIENCE
+              </h2>
               <div className="space-y-6">
                 {cvData.experience.map((exp, index) => (
                   <div
                     key={index}
-                    className={`border-l-4 border-blue-500 pl-4 ${isDarkMode ? "border-opacity-70" : ""}`}
+                    className={`border-l-4 border-blue-500 pl-4 ${
+                      isDarkMode ? "border-opacity-70" : ""
+                    }`}
                   >
                     <h3 className="text-lg font-semibold">{exp.title}</h3>
                     <p className="font-medium text-blue-600">{exp.company}</p>
-                    <p className={`text-sm mb-3 ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
+                    <p
+                      className={`text-sm mb-3 ${
+                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    >
                       {exp.period}, {exp.location}
                     </p>
                     <ul className="space-y-2">
                       {exp.responsibilities.map((resp, idx) => (
                         <li
                           key={idx}
-                          className={`text-sm leading-relaxed ${isDarkMode ? "text-gray-300" : "text-gray-700"}`}
+                          className={`text-sm leading-relaxed ${
+                            isDarkMode ? "text-gray-300" : "text-gray-700"
+                          }`}
                         >
                           • {resp}
                         </li>
@@ -649,14 +674,20 @@ Database for developers-Foundation Oracle`
 
             {/* Education */}
             <div>
-              <h2 className="text-xl font-bold mb-4 text-blue-600">EDUCATION</h2>
+              <h2 className="text-xl font-bold mb-4 text-blue-600">
+                EDUCATION
+              </h2>
               <div className="space-y-4">
                 {cvData.education.map((edu, index) => (
                   <div key={index} className="flex items-start space-x-3">
                     <GraduationCap className="w-5 h-5 text-blue-600 mt-1" />
                     <div>
                       <h3 className="font-semibold">{edu.degree}</h3>
-                      <p className={`text-sm ${isDarkMode ? "text-gray-300" : "text-gray-700"}`}>
+                      <p
+                        className={`text-sm ${
+                          isDarkMode ? "text-gray-300" : "text-gray-700"
+                        }`}
+                      >
                         {edu.institution} • {edu.grade} • {edu.year}
                       </p>
                     </div>
@@ -667,18 +698,34 @@ Database for developers-Foundation Oracle`
 
             {/* Technical Skills */}
             <div>
-              <h2 className="text-xl font-bold mb-3 text-blue-600">TECHNICAL SKILLS</h2>
-              <p className={`leading-relaxed ${isDarkMode ? "text-gray-300" : "text-gray-700"}`}>{cvData.skills}</p>
+              <h2 className="text-xl font-bold mb-3 text-blue-600">
+                TECHNICAL SKILLS
+              </h2>
+              <p
+                className={`leading-relaxed ${
+                  isDarkMode ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
+                {cvData.skills}
+              </p>
             </div>
 
             {/* Certificates */}
             <div>
-              <h2 className="text-xl font-bold mb-4 text-blue-600">CERTIFICATES</h2>
+              <h2 className="text-xl font-bold mb-4 text-blue-600">
+                CERTIFICATES
+              </h2>
               <div className="space-y-2">
                 {cvData.certificates.map((cert, index) => (
                   <div key={index} className="flex items-center space-x-2">
                     <Award className="w-4 h-4 text-blue-600" />
-                    <span className={`text-sm ${isDarkMode ? "text-gray-300" : "text-gray-700"}`}>{cert}</span>
+                    <span
+                      className={`text-sm ${
+                        isDarkMode ? "text-gray-300" : "text-gray-700"
+                      }`}
+                    >
+                      {cert}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -686,8 +733,14 @@ Database for developers-Foundation Oracle`
 
             {/* Achievement */}
             <div>
-              <h2 className="text-xl font-bold mb-3 text-blue-600">ACHIEVEMENT</h2>
-              <p className={`leading-relaxed ${isDarkMode ? "text-gray-300" : "text-gray-700"}`}>
+              <h2 className="text-xl font-bold mb-3 text-blue-600">
+                ACHIEVEMENT
+              </h2>
+              <p
+                className={`leading-relaxed ${
+                  isDarkMode ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
                 {cvData.achievement}
               </p>
             </div>
@@ -695,77 +748,77 @@ Database for developers-Foundation Oracle`
         </motion.div>
       </motion.div>
     </AnimatePresence>
-  )
+  );
 }
 
 // Visitor Counter Component
 function VisitorCounter() {
-  const [visitorCount, setVisitorCount] = useState(0)
-  const [isLoading, setIsLoading] = useState(true)
+  const [visitorCount, setVisitorCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Simulate real-time updates
     const updateVisitorCount = () => {
-      const stored = localStorage.getItem("portfolioVisitorCount")
-      const lastUpdate = localStorage.getItem("portfolioLastUpdate")
-      const now = Date.now()
+      const stored = localStorage.getItem("portfolioVisitorCount");
+      const lastUpdate = localStorage.getItem("portfolioLastUpdate");
+      const now = Date.now();
 
       if (!stored) {
         // First time visitor
-        const initialCount = Math.floor(Math.random() * 300) + 1500 // Start with 1500-1800
-        localStorage.setItem("portfolioVisitorCount", initialCount.toString())
-        localStorage.setItem("portfolioLastUpdate", now.toString())
-        return initialCount
+        const initialCount = Math.floor(Math.random() * 300) + 1500; // Start with 1500-1800
+        localStorage.setItem("portfolioVisitorCount", initialCount.toString());
+        localStorage.setItem("portfolioLastUpdate", now.toString());
+        return initialCount;
       }
 
-      const count = Number.parseInt(stored)
-      const lastUpdateTime = Number.parseInt(lastUpdate || "0")
+      const count = Number.parseInt(stored);
+      const lastUpdateTime = Number.parseInt(lastUpdate || "0");
 
       // Update every 30 seconds to 2 minutes randomly
-      const timeDiff = now - lastUpdateTime
-      const updateInterval = Math.random() * 90000 + 30000 // 30s to 2min
+      const timeDiff = now - lastUpdateTime;
+      const updateInterval = Math.random() * 90000 + 30000; // 30s to 2min
 
       if (timeDiff > updateInterval) {
-        const increment = Math.floor(Math.random() * 3) + 1 // Add 1-3 views
-        const newCount = count + increment
-        localStorage.setItem("portfolioVisitorCount", newCount.toString())
-        localStorage.setItem("portfolioLastUpdate", now.toString())
-        return newCount
+        const increment = Math.floor(Math.random() * 3) + 1; // Add 1-3 views
+        const newCount = count + increment;
+        localStorage.setItem("portfolioVisitorCount", newCount.toString());
+        localStorage.setItem("portfolioLastUpdate", now.toString());
+        return newCount;
       }
 
-      return count
-    }
+      return count;
+    };
 
     // Initial load
     setTimeout(() => {
-      const count = updateVisitorCount()
-      setIsLoading(false)
+      const count = updateVisitorCount();
+      setIsLoading(false);
 
       // Animate counter
-      let current = Math.max(0, count - 50)
-      const increment = Math.ceil((count - current) / 30)
+      let current = Math.max(0, count - 50);
+      const increment = Math.ceil((count - current) / 30);
       const timer = setInterval(() => {
-        current += increment
+        current += increment;
         if (current >= count) {
-          current = count
-          clearInterval(timer)
+          current = count;
+          clearInterval(timer);
         }
-        setVisitorCount(current)
-      }, 50)
+        setVisitorCount(current);
+      }, 50);
 
-      return () => clearInterval(timer)
-    }, 1000)
+      return () => clearInterval(timer);
+    }, 1000);
 
     // Set up real-time updates
     const interval = setInterval(() => {
-      const newCount = updateVisitorCount()
+      const newCount = updateVisitorCount();
       if (newCount > visitorCount) {
-        setVisitorCount(newCount)
+        setVisitorCount(newCount);
       }
-    }, 45000) // Check every 45 seconds
+    }, 45000); // Check every 45 seconds
 
-    return () => clearInterval(interval)
-  }, [visitorCount])
+    return () => clearInterval(interval);
+  }, [visitorCount]);
 
   return (
     <motion.div
@@ -806,7 +859,7 @@ function VisitorCounter() {
         </CardContent>
       </Card>
     </motion.div>
-  )
+  );
 }
 
 // Contact Form Component
@@ -815,54 +868,58 @@ function ContactForm() {
     email: "",
     subject: "",
     message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState("")
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState("");
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus("")
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus("");
 
     try {
       // Create mailto link
-      const mailtoLink = `mailto:mehedisiam10@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`From: ${formData.email}\n\nMessage:\n${formData.message}`)}`
+      const mailtoLink = `mailto:mehedisiam10@gmail.com?subject=${encodeURIComponent(
+        formData.subject
+      )}&body=${encodeURIComponent(
+        `From: ${formData.email}\n\nMessage:\n${formData.message}`
+      )}`;
 
       // Open email client
-      window.location.href = mailtoLink
+      window.location.href = mailtoLink;
 
       // Show success message
-      setSubmitStatus("success")
+      setSubmitStatus("success");
 
       // Reset form after a delay
       setTimeout(() => {
-        handleReset()
-        setSubmitStatus("")
-      }, 2000)
+        handleReset();
+        setSubmitStatus("");
+      }, 2000);
     } catch (error) {
-      setSubmitStatus("error")
-      console.error("Error sending email:", error)
+      setSubmitStatus("error");
+      console.error("Error sending email:", error);
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   const handleReset = () => {
     setFormData({
       email: "",
       subject: "",
       message: "",
-    })
-    setSubmitStatus("")
-  }
+    });
+    setSubmitStatus("");
+  };
 
   return (
     <Card className="bg-white/10 backdrop-blur-md border-white/20">
@@ -933,7 +990,11 @@ function ContactForm() {
           )}
 
           <div className="flex space-x-3">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex-1">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex-1"
+            >
               <Button
                 type="submit"
                 disabled={isSubmitting}
@@ -942,7 +1003,11 @@ function ContactForm() {
                 {isSubmitting ? (
                   <motion.div
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                    transition={{
+                      duration: 1,
+                      repeat: Number.POSITIVE_INFINITY,
+                      ease: "linear",
+                    }}
                     className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full mr-2"
                   />
                 ) : (
@@ -966,98 +1031,107 @@ function ContactForm() {
         </form>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 export default function Portfolio() {
-  const [activeSection, setActiveSection] = useState("hero")
-  const [isLoading, setIsLoading] = useState(true)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
-  const [isCVModalOpen, setIsCVModalOpen] = useState(false)
-  const { scrollYProgress } = useScroll()
+  const [activeSection, setActiveSection] = useState("hero");
+  const [isLoading, setIsLoading] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isCVModalOpen, setIsCVModalOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
 
   // Initialize theme from localStorage
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme")
+    const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
-      setIsDarkMode(savedTheme === "dark")
+      setIsDarkMode(savedTheme === "dark");
     } else {
       // Check system preference
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-      setIsDarkMode(prefersDark)
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      setIsDarkMode(prefersDark);
     }
-  }, [])
+  }, []);
 
   // Apply theme to document
   useEffect(() => {
     if (isDarkMode) {
-      document.documentElement.classList.add("dark")
-      localStorage.setItem("theme", "dark")
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
-      document.documentElement.classList.remove("dark")
-      localStorage.setItem("theme", "light")
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
-  }, [isDarkMode])
+  }, [isDarkMode]);
 
   const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode)
-  }
+    setIsDarkMode(!isDarkMode);
+  };
 
   useEffect(() => {
     setTimeout(() => {
-      setIsLoading(false)
-    }, 1000)
-  }, [])
+      setIsLoading(false);
+    }, 1000);
+  }, []);
 
   // Function to scroll to section
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
+    const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({
         behavior: "smooth",
         block: "start",
-      })
-      setActiveSection(sectionId)
-      setIsMobileMenuOpen(false) // Close mobile menu after navigation
+      });
+      setActiveSection(sectionId);
+      setIsMobileMenuOpen(false); // Close mobile menu after navigation
     }
-  }
+  };
 
   // Track active section on scroll
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "about", "experience", "education", "skills", "contact"]
-      const scrollPosition = window.scrollY + 100
+      const sections = [
+        "hero",
+        "about",
+        "experience",
+        "education",
+        "skills",
+        "contact",
+      ];
+      const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
-        const element = document.getElementById(section)
+        const element = document.getElementById(section);
         if (element) {
-          const offsetTop = element.offsetTop
-          const offsetBottom = offsetTop + element.offsetHeight
+          const offsetTop = element.offsetTop;
+          const offsetBottom = offsetTop + element.offsetHeight;
 
           if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
-            setActiveSection(section)
-            break
+            setActiveSection(section);
+            break;
           }
         }
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isMobileMenuOpen && !event.target.closest("header")) {
-        setIsMobileMenuOpen(false)
+        setIsMobileMenuOpen(false);
       }
-    }
+    };
 
-    document.addEventListener("click", handleClickOutside)
-    return () => document.removeEventListener("click", handleClickOutside)
-  }, [isMobileMenuOpen])
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [isMobileMenuOpen]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -1074,7 +1148,7 @@ export default function Portfolio() {
         duration: 0.5,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -1085,7 +1159,7 @@ export default function Portfolio() {
         duration: 0.5,
       },
     },
-  }
+  };
 
   const cardVariants = {
     hidden: { y: 50, opacity: 0 },
@@ -1107,14 +1181,14 @@ export default function Portfolio() {
         duration: 0.3,
       },
     },
-  }
+  };
 
   const experiences = [
     {
       title: "Junior QA Engineer",
       company: "Robi Axiata PLC (Vendor ESL)",
       period: "Feb 2025 - July 2025",
-      type: "Full-time",
+      type: "Contractual",
       description:
         "Leading quality assurance initiatives for mobile telecommunications services. Implementing comprehensive test automation frameworks, monitoring system performance with Dynatrace and Grafana, and managing test workflows through JIRA and Service Desk. Conducting API monitoring and performance testing to ensure optimal service reliability.",
       skills: [
@@ -1165,18 +1239,28 @@ export default function Portfolio() {
       type: "Remote",
       description:
         "Conducted manual testing, created test cases, and ensured software quality standards across multiple projects.",
-      skills: ["Manual Testing", "Test Case Design", "Quality Control", "Documentation"],
+      skills: [
+        "Manual Testing",
+        "Test Case Design",
+        "Quality Control",
+        "Documentation",
+      ],
     },
     {
-      title: "Software Quality Assurance Engineer Intern",
+      title: "SQA (Intern)",
       company: "Dream71 Bangladesh Ltd.",
       period: "Jun 2023 - Oct 2023",
       type: "Internship",
       description:
         "Assisted in testing web applications, learned QA methodologies, and contributed to quality improvement processes.",
-      skills: ["Web Testing", "QA Methodologies", "Test Planning", "Defect Management"],
+      skills: [
+        "Web Testing",
+        "QA Methodologies",
+        "Test Planning",
+        "Defect Management",
+      ],
     },
-  ]
+  ];
 
   const education = [
     {
@@ -1197,7 +1281,7 @@ export default function Portfolio() {
       year: "2015",
       type: "School",
     },
-  ]
+  ];
 
   const skills = [
     {
@@ -1215,7 +1299,15 @@ export default function Portfolio() {
     },
     {
       category: "Automation Frameworks",
-      items: ["Selenium WebDriver", "TestNG", "Cucumber", "BDD", "DDT", "Gherkin", "RestAssured"],
+      items: [
+        "Selenium WebDriver",
+        "TestNG",
+        "Cucumber",
+        "BDD",
+        "DDT",
+        "Gherkin",
+        "RestAssured",
+      ],
     },
     {
       category: "Programming & Build Tools",
@@ -1227,19 +1319,36 @@ export default function Portfolio() {
     },
     {
       category: "Monitoring & Analytics",
-      items: ["Dynatrace", "Grafana", "API Monitoring", "IP Monitoring", "Performance Monitoring", "JMeter"],
+      items: [
+        "Dynatrace",
+        "Grafana",
+        "API Monitoring",
+        "IP Monitoring",
+        "Performance Monitoring",
+        "JMeter",
+      ],
     },
     {
       category: "Project Management & Reporting",
-      items: ["JIRA", "Service Desk", "Allure Report", "TestRail", "BrowserStack", "Agile", "Scrum"],
+      items: [
+        "JIRA",
+        "Service Desk",
+        "Allure Report",
+        "TestRail",
+        "BrowserStack",
+        "Agile",
+        "Scrum",
+      ],
     },
-  ]
+  ];
 
   if (isLoading) {
     return (
       <div
         className={`h-screen w-screen flex items-center justify-center ${
-          isDarkMode ? "bg-gradient-to-br from-gray-900 to-blue-900" : "bg-gradient-to-br from-slate-50 to-blue-50"
+          isDarkMode
+            ? "bg-gradient-to-br from-gray-900 to-blue-900"
+            : "bg-gradient-to-br from-slate-50 to-blue-50"
         }`}
       >
         <motion.div
@@ -1258,7 +1367,7 @@ export default function Portfolio() {
           className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-500 to-purple-600"
         />
       </div>
-    )
+    );
   }
 
   return (
@@ -1268,7 +1377,9 @@ export default function Portfolio() {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className={`min-h-screen transition-colors duration-300 ${
-          isDarkMode ? "bg-gradient-to-br from-gray-900 to-blue-900" : "bg-gradient-to-br from-slate-50 to-blue-50"
+          isDarkMode
+            ? "bg-gradient-to-br from-gray-900 to-blue-900"
+            : "bg-gradient-to-br from-slate-50 to-blue-50"
         }`}
       >
         <motion.div
@@ -1280,14 +1391,20 @@ export default function Portfolio() {
         <VisitorCounter />
 
         {/* CV Modal */}
-        <CVModal isOpen={isCVModalOpen} onClose={() => setIsCVModalOpen(false)} isDarkMode={isDarkMode} />
+        <CVModal
+          isOpen={isCVModalOpen}
+          onClose={() => setIsCVModalOpen(false)}
+          isDarkMode={isDarkMode}
+        />
 
         <motion.header
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
           className={`backdrop-blur-md border-b sticky top-0 z-40 transition-colors duration-300 ${
-            isDarkMode ? "bg-gray-900/80 border-gray-700" : "bg-white/80 border-gray-200"
+            isDarkMode
+              ? "bg-gray-900/80 border-gray-700"
+              : "bg-white/80 border-gray-200"
           }`}
         >
           <div className="container mx-auto px-6 py-4">
@@ -1317,8 +1434,8 @@ export default function Portfolio() {
                       activeSection === section.id
                         ? "text-blue-600 font-semibold"
                         : isDarkMode
-                          ? "text-gray-300 hover:text-blue-400"
-                          : "text-gray-600 hover:text-blue-600"
+                        ? "text-gray-300 hover:text-blue-400"
+                        : "text-gray-600 hover:text-blue-600"
                     }`}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
@@ -1337,10 +1454,20 @@ export default function Portfolio() {
                   }`}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+                  title={
+                    isDarkMode ? "Switch to light mode" : "Switch to dark mode"
+                  }
                 >
-                  <motion.div initial={false} animate={{ rotate: isDarkMode ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                    {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                  <motion.div
+                    initial={false}
+                    animate={{ rotate: isDarkMode ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {isDarkMode ? (
+                      <Sun className="w-5 h-5" />
+                    ) : (
+                      <Moon className="w-5 h-5" />
+                    )}
                   </motion.div>
                 </motion.button>
               </div>
@@ -1358,14 +1485,24 @@ export default function Portfolio() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <motion.div initial={false} animate={{ rotate: isDarkMode ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                    {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                  <motion.div
+                    initial={false}
+                    animate={{ rotate: isDarkMode ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {isDarkMode ? (
+                      <Sun className="w-4 h-4" />
+                    ) : (
+                      <Moon className="w-4 h-4" />
+                    )}
                   </motion.div>
                 </motion.button>
 
                 <motion.button
                   className={`p-2 transition-colors ${
-                    isDarkMode ? "text-gray-300 hover:text-blue-400" : "text-gray-600 hover:text-blue-600"
+                    isDarkMode
+                      ? "text-gray-300 hover:text-blue-400"
+                      : "text-gray-600 hover:text-blue-600"
                   }`}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -1380,9 +1517,19 @@ export default function Portfolio() {
                     transition={{ duration: 0.3 }}
                   >
                     {isMobileMenuOpen ? (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     ) : (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4 6h16M4 12h16M4 18h16"
+                      />
                     )}
                   </motion.svg>
                 </motion.button>
@@ -1424,8 +1571,8 @@ export default function Portfolio() {
                               ? "text-blue-400 font-semibold bg-blue-900/30"
                               : "text-blue-600 font-semibold bg-blue-50"
                             : isDarkMode
-                              ? "text-gray-300 hover:text-blue-400 hover:bg-gray-800"
-                              : "text-gray-600 hover:text-blue-600 hover:bg-gray-50"
+                            ? "text-gray-300 hover:text-blue-400 hover:bg-gray-800"
+                            : "text-gray-600 hover:text-blue-600 hover:bg-gray-50"
                         }`}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -1446,7 +1593,9 @@ export default function Portfolio() {
         <section
           id="hero"
           className={`relative min-h-screen flex items-center justify-center py-20 px-6 transition-colors duration-300 ${
-            isDarkMode ? "bg-gradient-to-br from-gray-800 to-blue-900" : "bg-gradient-to-br from-blue-50 to-purple-50"
+            isDarkMode
+              ? "bg-gradient-to-br from-gray-800 to-blue-900"
+              : "bg-gradient-to-br from-blue-50 to-purple-50"
           }`}
         >
           <div className="container mx-auto text-center">
@@ -1552,7 +1701,9 @@ export default function Portfolio() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
-          className={`py-16 px-6 transition-colors duration-300 ${isDarkMode ? "bg-gray-800/50" : "bg-white/50"}`}
+          className={`py-16 px-6 transition-colors duration-300 ${
+            isDarkMode ? "bg-gray-800/50" : "bg-white/50"
+          }`}
         >
           <div className="container mx-auto">
             <motion.h2
@@ -1577,7 +1728,9 @@ export default function Portfolio() {
             >
               <Card
                 className={`transition-colors duration-300 ${
-                  isDarkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
+                  isDarkMode
+                    ? "bg-gray-800 border-gray-700"
+                    : "bg-white border-gray-200"
                 }`}
               >
                 <CardContent className="p-8">
@@ -1595,12 +1748,16 @@ export default function Portfolio() {
                       wordSpacing: "0.1em",
                     }}
                   >
-                    I am a dedicated Quality Assurance professional with over 2 years of experience in manual and
-                    automated testing. Currently working as a Junior QA Engineer at Robi Axiata PLC, I specialize in
-                    ensuring software quality through comprehensive testing strategies, performance monitoring, and
-                    automation frameworks. My expertise includes working with enterprise-level monitoring tools like
-                    Dynatrace and Grafana for system performance analysis, and extensive automation experience with
-                    Java, Selenium WebDriver, and BDD frameworks.
+                    I am a dedicated Quality Assurance professional with over 2
+                    years of experience in manual and automated testing.
+                    Currently working as a Junior QA Engineer at Robi Axiata
+                    PLC, I specialize in ensuring software quality through
+                    comprehensive testing strategies, performance monitoring,
+                    and automation frameworks. My expertise includes working
+                    with enterprise-level monitoring tools like Dynatrace and
+                    Grafana for system performance analysis, and extensive
+                    automation experience with Java, Selenium WebDriver, and BDD
+                    frameworks.
                   </motion.p>
                   <motion.p
                     initial={{ opacity: 0 }}
@@ -1616,14 +1773,20 @@ export default function Portfolio() {
                       wordSpacing: "0.1em",
                     }}
                   >
-                    At Robi, I manage test workflows through JIRA and Service Desk, design comprehensive test cases, and
-                    conduct API monitoring to ensure optimal telecommunications service reliability. During my
-                    internship at a1qa, I developed robust automation frameworks using Java, Cucumber, and TestNG,
-                    implemented CI/CD pipelines with Docker, and performed extensive API testing with RestAssured. My
-                    technical skills span across performance testing with JMeter, cross-browser testing with
-                    BrowserStack, detailed reporting with Allure, and backend development using node.js. I am
-                    passionate about delivering high-quality software solutions and continuously improving testing
-                    processes to enhance product reliability and user experience.
+                    At Robi, I manage test workflows through JIRA and Service
+                    Desk, design comprehensive test cases, and conduct API
+                    monitoring to ensure optimal telecommunications service
+                    reliability. During my internship at a1qa, I developed
+                    robust automation frameworks using Java, Cucumber, and
+                    TestNG, implemented CI/CD pipelines with Docker, and
+                    performed extensive API testing with RestAssured. My
+                    technical skills span across performance testing with
+                    JMeter, cross-browser testing with BrowserStack, detailed
+                    reporting with Allure, and backend development using
+                    node.js. I am passionate about delivering high-quality
+                    software solutions and continuously improving testing
+                    processes to enhance product reliability and user
+                    experience.
                   </motion.p>
                 </CardContent>
               </Card>
@@ -1638,7 +1801,9 @@ export default function Portfolio() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
-          className={`py-16 px-6 transition-colors duration-300 ${isDarkMode ? "bg-gray-900/50" : "bg-gray-50/50"}`}
+          className={`py-16 px-6 transition-colors duration-300 ${
+            isDarkMode ? "bg-gray-900/50" : "bg-gray-50/50"
+          }`}
         >
           <div className="container mx-auto">
             <motion.h2
@@ -1666,13 +1831,17 @@ export default function Portfolio() {
                 >
                   <Card
                     className={`overflow-hidden border-l-4 border-l-blue-500 transition-colors duration-300 ${
-                      isDarkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
+                      isDarkMode
+                        ? "bg-gray-800 border-gray-700"
+                        : "bg-white border-gray-200"
                     }`}
                   >
                     <CardHeader>
                       <div className="flex justify-between items-start">
                         <div>
-                          <CardTitle className="text-xl text-blue-600">{exp.title}</CardTitle>
+                          <CardTitle className="text-xl text-blue-600">
+                            {exp.title}
+                          </CardTitle>
                           <CardDescription
                             className={`text-lg font-semibold transition-colors duration-300 ${
                               isDarkMode ? "text-gray-300" : "text-gray-700"
@@ -1685,7 +1854,9 @@ export default function Portfolio() {
                           <Badge
                             variant="outline"
                             className={`transition-colors duration-300 ${
-                              isDarkMode ? "border-gray-600 text-gray-300" : "border-gray-300 text-gray-700"
+                              isDarkMode
+                                ? "border-gray-600 text-gray-300"
+                                : "border-gray-300 text-gray-700"
                             }`}
                           >
                             {exp.type}
@@ -1720,7 +1891,10 @@ export default function Portfolio() {
                             initial={{ opacity: 0, scale: 0.8 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ delay: 0.1 * skillIndex, duration: 0.3 }}
+                            transition={{
+                              delay: 0.1 * skillIndex,
+                              duration: 0.3,
+                            }}
                             whileHover={{ scale: 1.1 }}
                           >
                             <Badge
@@ -1751,7 +1925,9 @@ export default function Portfolio() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
-          className={`py-16 px-6 transition-colors duration-300 ${isDarkMode ? "bg-gray-800/50" : "bg-white/50"}`}
+          className={`py-16 px-6 transition-colors duration-300 ${
+            isDarkMode ? "bg-gray-800/50" : "bg-white/50"
+          }`}
         >
           <div className="container mx-auto">
             <motion.h2
@@ -1779,7 +1955,9 @@ export default function Portfolio() {
                 >
                   <Card
                     className={`transition-colors duration-300 ${
-                      isDarkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
+                      isDarkMode
+                        ? "bg-gray-800 border-gray-700"
+                        : "bg-white border-gray-200"
                     }`}
                   >
                     <CardContent className="p-6">
@@ -1815,7 +1993,9 @@ export default function Portfolio() {
                           <Badge
                             variant="outline"
                             className={`transition-colors duration-300 ${
-                              isDarkMode ? "border-gray-600 text-gray-300" : "border-gray-300 text-gray-700"
+                              isDarkMode
+                                ? "border-gray-600 text-gray-300"
+                                : "border-gray-300 text-gray-700"
                             }`}
                           >
                             {edu.type}
@@ -1844,7 +2024,9 @@ export default function Portfolio() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
-          className={`py-16 px-6 transition-colors duration-300 ${isDarkMode ? "bg-gray-900/50" : "bg-gray-50/50"}`}
+          className={`py-16 px-6 transition-colors duration-300 ${
+            isDarkMode ? "bg-gray-900/50" : "bg-gray-50/50"
+          }`}
         >
           <div className="container mx-auto">
             <motion.h2
@@ -1881,7 +2063,9 @@ export default function Portfolio() {
                     <CardHeader>
                       <CardTitle
                         className={`text-lg text-center bg-gradient-to-r ${
-                          isDarkMode ? "from-blue-400 to-purple-400" : "from-blue-600 to-purple-600"
+                          isDarkMode
+                            ? "from-blue-400 to-purple-400"
+                            : "from-blue-600 to-purple-600"
                         } bg-clip-text text-transparent`}
                       >
                         {skillGroup.category}
@@ -1896,7 +2080,10 @@ export default function Portfolio() {
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: 0.1 * skillIndex, duration: 0.3 }}
+                            transition={{
+                              delay: 0.1 * skillIndex,
+                              duration: 0.3,
+                            }}
                             whileHover={{ x: 5, color: "#3b82f6" }}
                           >
                             <Zap className="w-4 h-4 text-blue-500" />
@@ -1975,8 +2162,8 @@ export default function Portfolio() {
                 <div>
                   <h3 className="text-xl font-semibold mb-4">Let's Connect</h3>
                   <p className="text-lg mb-6 text-white/90">
-                    Ready to discuss your next QA project? Let's connect and explore how I can help ensure your software
-                    quality.
+                    Ready to discuss your next QA project? Let's connect and
+                    explore how I can help ensure your software quality.
                   </p>
                 </div>
 
@@ -2022,32 +2209,36 @@ export default function Portfolio() {
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
                     <a
-                                href="https://github.com/MehedyHasan10"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                      href="https://github.com/MehedyHasan10"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                    <Button variant="secondary" className="bg-white/20 hover:bg-white/30 text-white border-white/30">
-                    <Github className="w-4 h-4 mr-2" />
-                     GitHub
-                    </Button>
+                      <Button
+                        variant="secondary"
+                        className="bg-white/20 hover:bg-white/30 text-white border-white/30"
+                      >
+                        <Github className="w-4 h-4 mr-2" />
+                        GitHub
+                      </Button>
                     </a>
-
                   </motion.div>
                   <motion.div
                     whileHover={{ scale: 1.2, rotate: -5 }}
                     whileTap={{ scale: 0.9 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
-                     <a
-                                href="https://www.linkedin.com/in/md-mehedy-hasan-siam"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                    <a
+                      href="https://www.linkedin.com/in/md-mehedy-hasan-siam"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <Button variant="secondary" className="bg-white/20 hover:bg-white/30 text-white border-white/30">
-                      <Linkedin className="w-4 h-4 mr-2" />
-                      LinkedIn
-                    </Button>
-
+                      <Button
+                        variant="secondary"
+                        className="bg-white/20 hover:bg-white/30 text-white border-white/30"
+                      >
+                        <Linkedin className="w-4 h-4 mr-2" />
+                        LinkedIn
+                      </Button>
                     </a>
                   </motion.div>
                 </div>
@@ -2079,11 +2270,12 @@ export default function Portfolio() {
               viewport={{ once: true }}
               transition={{ duration: 1 }}
             >
-              &copy; {new Date().getFullYear()} Md. Mehedy Hasan Siam. All rights reserved.
+              &copy; {new Date().getFullYear()} Md. Mehedy Hasan Siam. All
+              rights reserved.
             </motion.p>
           </div>
         </footer>
       </motion.div>
     </AnimatePresence>
-  )
+  );
 }
