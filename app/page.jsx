@@ -45,7 +45,7 @@ const cvData = {
     address: "Block-C, House No.31, Banasree, Dhaka",
   },
   summary:
-    "QA Engineer with 2+ years of experience in manual and automated testing, ensuring the quality and reliability of web and software applications. Proficient in Selenium WebDriver, TestNG, and CI/CD integration, with expertise in test automation, functional testing, and detailed documentation. Skilled in identifying bugs, enhancing test coverage, and optimizing testing strategies to deliver high-quality products.",
+    "QA Engineer with 1.4+ years of experience in manual and automated testing, ensuring the quality and reliability of web and software applications. Proficient in Selenium WebDriver, TestNG, and CI/CD integration, with expertise in test automation, functional testing, and detailed documentation. Skilled in identifying bugs, enhancing test coverage, and optimizing testing strategies to deliver high-quality products.",
   experience: [
     {
       title: "Junior QA Engineer",
@@ -446,7 +446,7 @@ function CVModal({ isOpen, onClose, isDarkMode }) {
       .catch((error) => {
         console.error("Error loading jsPDF:", error);
         // Fallback to text download with exact format
-        const cvContent = `QA Engineer with 2+ years of experience in manual and automated testing, ensuring the quality and reliability of web and software applications. Proficient in Selenium WebDriver, TestNG, and CI/CD integration, with expertise in test automation, functional testing, and detailed documentation. Skilled in identifying bugs, enhancing test coverage, and optimizing testing strategies to deliver high-quality products.
+        const cvContent = `QA Engineer with 1.4+ years of experience in manual and automated testing, ensuring the quality and reliability of web and software applications. Proficient in Selenium WebDriver, TestNG, and CI/CD integration, with expertise in test automation, functional testing, and detailed documentation. Skilled in identifying bugs, enhancing test coverage, and optimizing testing strategies to deliver high-quality products.
 
 Md. Mehedy Hasan Siam
 mehedisiam10@gmail.com
@@ -494,7 +494,7 @@ Collaborated with cross-functional teams to implement data validation strategies
 
 SQA Engineer (Intern)
 Dream71 Bangladesh Ltd.
-June 2023-October 2023, Full time, Bashundhara, Dhaka
+June 2023-October 2023,Intern, Bashundhara, Dhaka
 Conducted Unit, Integration, and System Testing, including Design Verification, Non-Functional, and Regression Testing.
 Conducted API testing with Postman API and Web Debugging with Charles and Fiddler.
 Executed Cross-Browser Testing to identify GUI and Functional Bugs.
@@ -1748,8 +1748,8 @@ export default function Portfolio() {
                       wordSpacing: "0.1em",
                     }}
                   >
-                    I am a dedicated Quality Assurance professional with over 2
-                    years of experience in manual and automated testing.
+                    I am a dedicated Quality Assurance professional with over
+                    1.4+ years of experience in manual and automated testing.
                     Currently working as a Junior QA Engineer at Robi Axiata
                     PLC, I specialize in ensuring software quality through
                     comprehensive testing strategies, performance monitoring,
