@@ -45,21 +45,20 @@ const cvData = {
     address: "Block-C, House No.31, Banasree, Dhaka",
   },
   summary:
-    "QA Engineer with 1.4+ years of experience in manual and automated testing, ensuring the quality and reliability of web and software applications. Proficient in Selenium WebDriver, TestNG, and CI/CD integration, with expertise in test automation, functional testing, and detailed documentation. Skilled in identifying bugs, enhancing test coverage, and optimizing testing strategies to deliver high-quality products.",
+    "IT-SOC and QA professional with 1.5+ years of experience in security operations, manual and automated testing, and data quality management. Proficient in SIEM, Dynatrace, Grafana, Selenium WebDriver, TestNG, and CI/CD integration, with expertise in incident monitoring, test automation, API testing, and functional testing. Skilled in analyzing security alerts, performing log analysis, identifying bugs, enhancing test coverage, and optimizing testing and monitoring strategies to deliver secure, reliable, and high-quality software and systems.",
   experience: [
     {
-      title: "Junior QA Engineer",
+      title: "Junior IT-SOC Engineer",
       company: "Robi Axiata PLC (Vendor ESL)",
       period: "February 2025-July 2025",
       location: "Contractual,Shanta Forum, Dhaka",
       responsibilities: [
-        "Designed and executed 200+ test cases and 5 project checklists, achieving 85% defect detection across the Software Testing Life Cycle (STLC).",
-        "Tracked and resolved issues using Jira and Service Desk.",
-        "Monitored database alerts, ensured backup health, and validated automated backups.",
-        "Facilitated Agile ceremonies (sprint planning, reviews, stand-ups, retros) and collaborated with cross-functional teams.",
-        "Improved UI/UX, contributing to a 15% increase in user retention.",
-        "Working with developers, DevOps, and cross-functional teams to improve software quality.",
-        "Monitored system performance and alerts using Dynatrace, My Robi, Robi Cash, Robi Alap, bdtickets, and IT360.",
+        "Monitored security alerts and logs using SIEM tools to identify, analyze, and respond to potential security incidents.",
+        "System monitoring and alerts – Experienced with Dynatrace, My Robi, Robi Cash, Robi Alap, bdtickets, and IT360 Portal to monitor system performance and detect critical alerts.",
+        "Assisted in incident detection, triage, and escalation following SOC procedures and playbooks.",
+        "Performed basic threat analysis, log correlation, and vulnerability assessment to support security operations.",
+        "Documented incidents, investigation steps, and remediation actions for reporting and compliance purposes.",
+        "Collaborated with senior SOC analysts and IT teams to improve security monitoring and incident response processes.",
       ],
     },
     {
@@ -131,12 +130,14 @@ const cvData = {
     "Selenium WebDriver, Aquality Selenium, TestNG, Gherkin, Jenkins, Allure, BrowserStack, DDT, Postman, JMeter, Jira, Git, Postman, Java, Docker, SQL",
   certificates: [
     "API Fundamentals Student Expert - Postman",
-    "QA Automation Testing - a1qa",
+    "Artificial Intelligence with Python ",
+    "Introduction to Cybersecurity ",
+    "Apache JMeter™ Intro ",
     "Big Data and Hadoop",
     "Database for developers-Foundation Oracle",
   ],
   achievement:
-    "Reported a critical bug in the Telegram Android app where incoming calls continued ringing if data was turned off mid-ring; submitted a detailed bug report and video demonstration, which was officially acknowledged by the Telegram team.",
+    "Reported a critical bug in the Telegram Android app where incoming calls continued ringing if data was turned off mid-ring. I informed the Telegram team about the issue",
 };
 
 // CV Modal Component
@@ -159,7 +160,7 @@ function CVModal({ isOpen, onClose, isDarkMode }) {
         doc.setFontSize(10);
         doc.setFont("helvetica", "normal");
         const summaryText =
-          "QA Engineer with 2+ years of experience in manual and automated testing, ensuring the quality and reliability of web and software applications. Proficient in Selenium WebDriver, TestNG, and CI/CD integration, with expertise in test automation, functional testing, and detailed documentation. Skilled in identifying bugs, enhancing test coverage, and optimizing testing strategies to deliver high-quality products.";
+          "IT-SOC and QA professional with 1.5+ years of experience in security operations, manual and automated testing, and data quality management. Proficient in SIEM, Dynatrace, Grafana, Selenium WebDriver, TestNG, and CI/CD integration, with expertise in incident monitoring, test automation, API testing, and functional testing. Skilled in analyzing security alerts, performing log analysis, identifying bugs, enhancing test coverage, and optimizing testing and monitoring strategies to deliver secure, reliable, and high-quality software and systems.";
         const summaryLines = doc.splitTextToSize(summaryText, maxWidth);
         doc.text(summaryLines, margin, yPosition);
         yPosition += summaryLines.length * 4 + 8;
@@ -219,13 +220,12 @@ function CVModal({ isOpen, onClose, isDarkMode }) {
 
         // Responsibilities for Robi
         const robiResponsibilities = [
-          "Designed and executed 200+ test cases and 5 project checklists, achieving 85% defect detection across the Software Testing Life Cycle (STLC).",
-          "Tracked and resolved issues using Jira and Service Desk.",
-          "Monitored database alerts, ensured backup health, and validated automated backups.",
-          "Facilitated Agile ceremonies (sprint planning, reviews, stand-ups, retros) and collaborated with cross-functional teams.",
-          "Improved UI/UX, contributing to a 15% increase in user retention.",
-          "Working with developers, DevOps, and cross-functional teams to improve software quality.",
-          "Monitored system performance and alerts using Dynatrace, My Robi, Robi Cash, Robi Alap, bdtickets, and IT360.",
+          "Monitored security alerts and logs using SIEM tools to identify, analyze, and respond to potential security incidents.",
+          "System monitoring and alerts – Experienced with Dynatrace, My Robi, Robi Cash, Robi Alap, bdtickets, and IT360 Portal to monitor system performance and detect critical alerts.",
+          "Assisted in incident detection, triage, and escalation following SOC procedures and playbooks.",
+          "Performed basic threat analysis, log correlation, and vulnerability assessment to support security operations.",
+          "Documented incidents, investigation steps, and remediation actions for reporting and compliance purposes.",
+          "Collaborated with senior SOC analysts and IT teams to improve security monitoring and incident response processes.",
         ];
 
         robiResponsibilities.forEach((resp) => {
@@ -332,17 +332,6 @@ function CVModal({ isOpen, onClose, isDarkMode }) {
         });
         yPosition += 5;
 
-        // // Address
-        // if (yPosition > 260) {
-        //   doc.addPage()
-        //   yPosition = 20
-        // }
-
-        // doc.setFontSize(10)
-        // doc.setFont("helvetica", "normal")
-        // doc.text("Block-C, House No.31, Banasree, Dhaka", margin, yPosition)
-        // yPosition += 10
-
         // ACHIEVEMENT Section
         doc.setFontSize(12);
         doc.setFont("helvetica", "bold");
@@ -352,7 +341,7 @@ function CVModal({ isOpen, onClose, isDarkMode }) {
         doc.setFontSize(10);
         doc.setFont("helvetica", "normal");
         const achievementText =
-          "Reported a critical bug in the Telegram Android app where incoming calls continued ringing if data was turned off mid-ring; submitted a detailed bug report and video demonstration, which was officially acknowledged by the Telegram team.";
+          "Reported a critical bug in the Telegram Android app where incoming calls continued ringing if data was turned off mid-ring. I informed the Telegram team about the issue.";
         const achievementLines = doc.splitTextToSize(achievementText, maxWidth);
         doc.text(achievementLines, margin, yPosition);
         yPosition += achievementLines.length * 4 + 10;
@@ -430,7 +419,11 @@ function CVModal({ isOpen, onClose, isDarkMode }) {
           yPosition
         );
         yPosition += 5;
-        doc.text("QA Automation Testing - a1qa", margin, yPosition);
+        doc.text("Artificial Intelligence with Python", margin, yPosition);
+        yPosition += 5;
+        doc.text("Introduction to Cybersecurity", margin, yPosition);
+        yPosition += 5;
+        doc.text("Apache JMeter™ Intro", margin, yPosition);
         yPosition += 5;
         doc.text("Big Data and Hadoop", margin, yPosition);
         yPosition += 5;
@@ -446,7 +439,7 @@ function CVModal({ isOpen, onClose, isDarkMode }) {
       .catch((error) => {
         console.error("Error loading jsPDF:", error);
         // Fallback to text download with exact format
-        const cvContent = `QA Engineer with 1.4+ years of experience in manual and automated testing, ensuring the quality and reliability of web and software applications. Proficient in Selenium WebDriver, TestNG, and CI/CD integration, with expertise in test automation, functional testing, and detailed documentation. Skilled in identifying bugs, enhancing test coverage, and optimizing testing strategies to deliver high-quality products.
+        const cvContent = `IT-SOC and QA professional with 1.5+ years of experience in security operations, manual and automated testing, and data quality management. Proficient in SIEM, Dynatrace, Grafana, Selenium WebDriver, TestNG, and CI/CD integration, with expertise in incident monitoring, test automation, API testing, and functional testing. Skilled in analyzing security alerts, performing log analysis, identifying bugs, enhancing test coverage, and optimizing testing and monitoring strategies to deliver secure, reliable, and high-quality software and systems.
 
 Md. Mehedy Hasan Siam
 mehedisiam10@gmail.com
@@ -460,16 +453,14 @@ SUMMARY
 
 EXPERIENCE
 
-Junior QA Engineer
+Junior IT-SOC Engineer
 Robi Axiata PLC (Vendor ESL)
-February 2025- July 2025, contractual, Shanta Forum, Dhaka
-Designed and executed 200+ test cases and 5 project checklists, achieving 85% defect detection across the Software Testing Life Cycle (STLC).
-Tracked and resolved issues using Jira and Service Desk.
-Monitored database alerts, ensured backup health, and validated automated backups.
-Facilitated Agile ceremonies (sprint planning, reviews, stand-ups, retros) and collaborated with cross-functional teams.
-Improved UI/UX, contributing to a 15% increase in user retention.
-Working with developers, DevOps, and cross-functional teams to improve software quality.
-Monitored system performance and alerts using Dynatrace, My Robi, Robi Cash, Robi Alap, bdtickets, and IT360.
+Monitored security alerts and logs using SIEM tools to identify, analyze, and respond to potential security incidents.
+System Monitoring & Alerts – Experience with Dynatrace, My Robi, Robi Cash, Robi Alap, bdtickets, and IT360 Portal to monitor system performance and detect critical alerts.
+Assisted in incident detection, triage, and escalation following SOC procedures and playbooks.
+Performed basic threat analysis, log correlation, and vulnerability assessment to support security operations.
+Documented incidents, investigation steps, and remediation actions for reporting and compliance purposes.
+Collaborated with senior SOC analysts and IT teams to improve security monitoring and incident response processes.
 
 QA Automation Engineer (Trainee)
 a1qa
@@ -504,7 +495,7 @@ Participated in daily Scrum meetings to ensure effective communication and progr
 
 
 ACHIEVEMENT
-Reported a critical bug in the Telegram Android app where incoming calls continued ringing if data was turned off mid-ring; submitted a detailed bug report and video demonstration, which was officially acknowledged by the Telegram team.
+Reported a critical bug in the Telegram Android app where incoming calls continued ringing if data was turned off mid-ring. I informed the Telegram team about the issue.
 
 EDUCATION
 Bachelor of Science, Computer Science & Engineering
@@ -521,7 +512,9 @@ Selenium WebDriver, Aquality Selenium, TestNG, Gherkin, Jenkins, Allure, Browser
 
 CERTIFICATE
 API Fundamentals Student Expert - Postman
-QA Automation Testing - a1qa
+Artificial Intelligence with Python
+Introduction to Cybersecurity
+Apache JMeter™ Intro
 Big Data and Hadoop
 Database for developers-Foundation Oracle`;
 
@@ -748,117 +741,6 @@ Database for developers-Foundation Oracle`;
         </motion.div>
       </motion.div>
     </AnimatePresence>
-  );
-}
-
-// Visitor Counter Component
-function VisitorCounter() {
-  const [visitorCount, setVisitorCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate real-time updates
-    const updateVisitorCount = () => {
-      const stored = localStorage.getItem("portfolioVisitorCount");
-      const lastUpdate = localStorage.getItem("portfolioLastUpdate");
-      const now = Date.now();
-
-      if (!stored) {
-        // First time visitor
-        const initialCount = Math.floor(Math.random() * 300) + 1500; // Start with 1500-1800
-        localStorage.setItem("portfolioVisitorCount", initialCount.toString());
-        localStorage.setItem("portfolioLastUpdate", now.toString());
-        return initialCount;
-      }
-
-      const count = Number.parseInt(stored);
-      const lastUpdateTime = Number.parseInt(lastUpdate || "0");
-
-      // Update every 30 seconds to 2 minutes randomly
-      const timeDiff = now - lastUpdateTime;
-      const updateInterval = Math.random() * 90000 + 30000; // 30s to 2min
-
-      if (timeDiff > updateInterval) {
-        const increment = Math.floor(Math.random() * 3) + 1; // Add 1-3 views
-        const newCount = count + increment;
-        localStorage.setItem("portfolioVisitorCount", newCount.toString());
-        localStorage.setItem("portfolioLastUpdate", now.toString());
-        return newCount;
-      }
-
-      return count;
-    };
-
-    // Initial load
-    setTimeout(() => {
-      const count = updateVisitorCount();
-      setIsLoading(false);
-
-      // Animate counter
-      let current = Math.max(0, count - 50);
-      const increment = Math.ceil((count - current) / 30);
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= count) {
-          current = count;
-          clearInterval(timer);
-        }
-        setVisitorCount(current);
-      }, 50);
-
-      return () => clearInterval(timer);
-    }, 1000);
-
-    // Set up real-time updates
-    const interval = setInterval(() => {
-      const newCount = updateVisitorCount();
-      if (newCount > visitorCount) {
-        setVisitorCount(newCount);
-      }
-    }, 45000); // Check every 45 seconds
-
-    return () => clearInterval(interval);
-  }, [visitorCount]);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
-      className="fixed bottom-6 right-6 z-40"
-    >
-      <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0 shadow-lg">
-        <CardContent className="p-4">
-          <div className="flex items-center space-x-3">
-            <motion.div
-              animate={{
-                rotate: [0, 10, -10, 0],
-                scale: [1, 1.1, 1],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Number.POSITIVE_INFINITY,
-                repeatDelay: 2,
-              }}
-            >
-              <Eye className="w-5 h-5" />
-            </motion.div>
-            <div>
-              <p className="text-xs font-medium opacity-90">Portfolio Views</p>
-              <motion.p
-                className="text-lg font-bold"
-                key={visitorCount}
-                initial={{ scale: 1.2, color: "#fbbf24" }}
-                animate={{ scale: 1, color: "#ffffff" }}
-                transition={{ duration: 0.5 }}
-              >
-                {isLoading ? "..." : visitorCount.toLocaleString()}
-              </motion.p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </motion.div>
   );
 }
 
@@ -1185,12 +1067,12 @@ export default function Portfolio() {
 
   const experiences = [
     {
-      title: "Junior QA Engineer",
+      title: "Junior IT-SOC Engineer",
       company: "Robi Axiata PLC (Vendor ESL)",
       period: "Feb 2025 - July 2025",
       type: "Contractual",
       description:
-        "Leading quality assurance initiatives for mobile telecommunications services. Implementing comprehensive test automation frameworks, monitoring system performance with Dynatrace and Grafana, and managing test workflows through JIRA and Service Desk. Conducting API monitoring and performance testing to ensure optimal service reliability.",
+        "Leading IT-SOC operations for mobile telecommunications services. Monitoring system performance and security alerts using Dynatrace and Grafana, managing incidents and workflows through JIRA and Service Desk, and conducting API monitoring, threat analysis, and performance checks to ensure optimal system reliability and security.",
       skills: [
         "JIRA",
         "Service Desk",
@@ -1233,15 +1115,15 @@ export default function Portfolio() {
       ],
     },
     {
-      title: "Junior Quality Control Engineer",
+      title: "Junior Project Associate",
       company: "Quantanite Bangladesh Ltd.",
       period: "Oct 2023 - Jul 2024",
       type: "Remote",
       description:
-        "Conducted manual testing, created test cases, and ensured software quality standards across multiple projects.",
+        "Responsible for cleaning, organizing, and analyzing large datasets to ensure data quality and integrity. Ensured data adhered to predefined standards, identifying and correcting inconsistencies to maintain reliability and accuracy. Implemented strategies to guarantee data accuracy, supporting smooth project progression and successful outcomes.",
       skills: [
-        "Manual Testing",
-        "Test Case Design",
+        "Microsoft Excel",
+        "Google Sheets",
         "Quality Control",
         "Documentation",
       ],
@@ -1252,7 +1134,7 @@ export default function Portfolio() {
       period: "Jun 2023 - Oct 2023",
       type: "Internship",
       description:
-        "Assisted in testing web applications, learned QA methodologies, and contributed to quality improvement processes.",
+        "Testing web applications, gaining hands-on experience with QA methodologies. Contributed to creating and executing test cases, identifying bugs, and improving overall software quality. Supported the implementation of quality improvement processes and collaborated with team members to ensure reliable and efficient project outcomes.",
       skills: [
         "Web Testing",
         "QA Methodologies",
@@ -1388,7 +1270,6 @@ export default function Portfolio() {
         />
 
         {/* Visitor Counter */}
-        <VisitorCounter />
 
         {/* CV Modal */}
         <CVModal
@@ -1739,7 +1620,7 @@ export default function Portfolio() {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2, duration: 0.5 }}
-                    className={`text-lg leading-relaxed mb-6 transition-colors duration-300 text-justify hyphens-auto ${
+                    className={` ${
                       isDarkMode ? "text-gray-300" : "text-gray-700"
                     }`}
                     style={{
@@ -1748,23 +1629,22 @@ export default function Portfolio() {
                       wordSpacing: "0.1em",
                     }}
                   >
-                    I am a dedicated Quality Assurance professional with over
-                    1.4+ years of experience in manual and automated testing.
-                    Currently working as a Junior QA Engineer at Robi Axiata
-                    PLC, I specialize in ensuring software quality through
-                    comprehensive testing strategies, performance monitoring,
-                    and automation frameworks. My expertise includes working
-                    with enterprise-level monitoring tools like Dynatrace and
-                    Grafana for system performance analysis, and extensive
-                    automation experience with Java, Selenium WebDriver, and BDD
-                    frameworks.
+                    I am a dedicated IT-SOC and Quality Assurance professional
+                    with over 1.5 years of experience in security operations,
+                    manual and automated testing, and data quality management. I
+                    monitor security and system alerts using SIEM, Dynatrace,
+                    and Grafana, perform incident triage, log analysis, and
+                    collaborate with SOC and DevOps teams to ensure smooth IT
+                    operations. I also design comprehensive test cases, conduct
+                    API monitoring, and support system performance and
+                    reliability through detailed reporting.
                   </motion.p>
                   <motion.p
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.4, duration: 0.5 }}
-                    className={`text-lg leading-relaxed transition-colors duration-300 text-justify hyphens-auto ${
+                    className={` ${
                       isDarkMode ? "text-gray-300" : "text-gray-700"
                     }`}
                     style={{
@@ -1773,20 +1653,14 @@ export default function Portfolio() {
                       wordSpacing: "0.1em",
                     }}
                   >
-                    At Robi, I manage test workflows through JIRA and Service
-                    Desk, design comprehensive test cases, and conduct API
-                    monitoring to ensure optimal telecommunications service
-                    reliability. During my internship at a1qa, I developed
-                    robust automation frameworks using Java, Cucumber, and
-                    TestNG, implemented CI/CD pipelines with Docker, and
-                    performed extensive API testing with RestAssured. My
-                    technical skills span across performance testing with
-                    JMeter, cross-browser testing with BrowserStack, detailed
-                    reporting with Allure, and backend development using
-                    node.js. I am passionate about delivering high-quality
-                    software solutions and continuously improving testing
-                    processes to enhance product reliability and user
-                    experience.
+                    In addition, I have developed robust automated tests using
+                    Java, Selenium WebDriver, TestNG, and BDD frameworks,
+                    integrated them into CI/CD pipelines, and performed API,
+                    performance, and cross-browser testing. My experience spans
+                    data processing, functional and regression testing, and
+                    backend development with Node.js, with a focus on improving
+                    software quality, product reliability, and user experience
+                    through continuous process enhancement.
                   </motion.p>
                 </CardContent>
               </Card>
@@ -1843,7 +1717,7 @@ export default function Portfolio() {
                             {exp.title}
                           </CardTitle>
                           <CardDescription
-                            className={`text-lg font-semibold transition-colors duration-300 ${
+                            className={`font-semibold transition-colors duration-300 ${
                               isDarkMode ? "text-gray-300" : "text-gray-700"
                             }`}
                           >
